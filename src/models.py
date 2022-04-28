@@ -12,30 +12,41 @@ class User(Base):
     __tablename__ = 'user'
     id = Column(Integer, primary_key=True)
     username = Column(String(250), nullable=False, unique=True)
-    name = Column(String(250), nullable=False)
-    lastname = Column(String(250), nullable=False)
     email = Column(String(250), nullable=False, unique=True)
+    password = Column(String(250), nullable=False)
 
-class Post(Base):
-    __tablename__ = 'post'
+class Favorites(Base):
+    __tablename__ = 'favorites'
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('user.id'))
     user = relationship(User)
+    
 
-class Comment(Base):
-    __tablename__ = 'comment'
+class Characters(Base):
+    __tablename__ = 'characters'
     id = Column(Integer, primary_key=True)
-    text = Column(String(250), nullable=False)
-    user_id = Column(Integer, ForeignKey('user.id'))
-    user = relationship(User)
-    post_id = Column(Integer, ForeignKey('post.id'))
-    post = relationship(Post)
+    name = Column(String(250), nullable=False)
+    age = Column(Integer, nullable=False)
+    gender = Column(String(250), nullable=False)
+    favorites_id = Column(Integer, ForeignKey('favorites.id'))
+    favorites = relationship(Favorites)
 
-class Follower(Base):
-    __tablename__ = 'follower'
+class Planets(Base):
+    __tablename__ = 'planets'
     id = Column(Integer, primary_key=True)
-    follower_id = Column(Integer, ForeignKey('user.id'))
-    following_id = Column(Integer, ForeignKey('user.id'))
-    user = relationship(User)
+    name = Column(String(250), nullable=False)
+    terrain = Column(String(250), nullable=False)
+    gender = Column(String(250), nullable=False)
+    favorites_id = Column(Integer, ForeignKey('favorites.id'))
+    favorites = relationship(Favorites)
 
+class Vehicles(Base):
+    __tablename__ = 'vehicles'
+    id = Column(Integer, primary_key=True)
+    name = Column(String(250), nullable=False)
+    model = Column(String(250), nullable=False)
+    capacity = Column(Integer, nullable=False)
+    favorites_id = Column(Integer, ForeignKey('favorites.id'))
+    favorites = relationship(Favorites)
+    
 render_er(Base, 'diagram.png')
