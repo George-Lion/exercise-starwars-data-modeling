@@ -12,15 +12,7 @@ class User(Base):
     __tablename__ = 'user'
     id = Column(Integer, primary_key=True)
     username = Column(String(250), nullable=False, unique=True)
-    email = Column(String(250), nullable=False, unique=True)
     password = Column(String(250), nullable=False)
-
-class Favorites(Base):
-    __tablename__ = 'favorites'
-    id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, ForeignKey('user.id'))
-    user = relationship(User)
-    
 
 class Characters(Base):
     __tablename__ = 'characters'
@@ -28,8 +20,7 @@ class Characters(Base):
     name = Column(String(250), nullable=False)
     age = Column(Integer, nullable=False)
     gender = Column(String(250), nullable=False)
-    favorites_id = Column(Integer, ForeignKey('favorites.id'))
-    favorites = relationship(Favorites)
+    
 
 class Planets(Base):
     __tablename__ = 'planets'
@@ -37,8 +28,7 @@ class Planets(Base):
     name = Column(String(250), nullable=False)
     terrain = Column(String(250), nullable=False)
     gender = Column(String(250), nullable=False)
-    favorites_id = Column(Integer, ForeignKey('favorites.id'))
-    favorites = relationship(Favorites)
+    
 
 class Vehicles(Base):
     __tablename__ = 'vehicles'
@@ -46,7 +36,18 @@ class Vehicles(Base):
     name = Column(String(250), nullable=False)
     model = Column(String(250), nullable=False)
     capacity = Column(Integer, nullable=False)
-    favorites_id = Column(Integer, ForeignKey('favorites.id'))
-    favorites = relationship(Favorites)
+    
+class Favorites(Base):
+    __tablename__ = 'favorites'
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('user.id'))
+    user = relationship(User)
+    characters_id = Column(Integer, ForeignKey('characters.id'))
+    characters = relationship(Characters)
+    planets_id = Column(Integer, ForeignKey('planets.id'))
+    planets = relationship(Planets)
+    vehicles_id = Column(Integer, ForeignKey('vehicles.id'))
+    vehicles = relationship(Vehicles)
+
     
 render_er(Base, 'diagram.png')
