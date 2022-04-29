@@ -1,3 +1,14 @@
+# Diagrama de base de datos Star Wars
+
+Aplicando la relación entre `Primary_key` y `ForeignKey` se pueden conectar cada una de las tablas con las que se desea recibir o enviar
+información, para realizar el diagrama de star wars se utilizó `quick data base diagrams`, la base de datos cuenta con varias tablas divididas en 
+`user`,`favorites`,`characters`, `planets`,`vehicles`. La finalidad poder almacenar a nuestra tabla de favoritos la información que se encuentra en
+las otras tablas.
+
+<img src="/img/diagram.jpg" alt="diagram"/>
+
+-----------------------------------------------------------------------------
+
 # StarWars blog database (base de datos)
 
 **Importante**: Para realizar esta actividad necesitas hacer un `fork` de este repo en tu cuenta de **Github** y luego, abrir el *fork* en Gitpod.
